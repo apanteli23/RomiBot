@@ -17,6 +17,7 @@ public class BasicAutonomous extends SequentialCommandGroup {
   public BasicAutonomous(DriveSubsystem drivebase) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+    //Moves forward 5 inches, turns 90 degrees, and moves forward 5 inches
     addCommands(
         new DriveDistance(0.5, 5, drivebase),
         new TurnDegrees(0.5, 90, drivebase),
