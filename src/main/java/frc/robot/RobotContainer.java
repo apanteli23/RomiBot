@@ -14,6 +14,7 @@ import frc.robot.subsystems.DriveBase.DriveSubsystem;
 import frc.robot.subsystems.DriveBase.Drive;
 import frc.robot.Constants.IOConstants;
 import frc.robot.control.*;
+import frc.robot.Autonomous.BasicAutonomous;
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -24,14 +25,14 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem m_drive = new DriveSubsystem();
  
-  public static XboxController m_driverController = new XboxController(IOConstants.kDriverControllerPort);
+  public static XboxController m_controller = new XboxController(IOConstants.kDriverControllerPort);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
       
-    new Drive(m_drive, () -> m_driverController.getRightY(), () -> m_driverController.getLeftY());
+    new Drive(m_drive, () -> m_controller.getRightY(), () -> m_controller.getLeftY());
 
     // Configure the button bindings
     configureButtonBindings();
@@ -44,6 +45,8 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    new XboxControllerButton(m_controller, XboxController.Button.kA)
+      .whenPressed(new BasicAutonomous(m_drive));
   }
 
 
